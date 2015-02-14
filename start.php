@@ -24,7 +24,7 @@ function polls_init() {
 	elgg_register_page_handler('polls','polls_page_handler');
 
 	// Register a URL handler for poll posts
-	elgg_register_entity_url_handler('object','poll','polls_url');
+	elgg_register_plugin_hook_handler('entity:url', 'object', 'polls_url');
 	
 	// add link to owner block
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'polls_owner_block_menu');
@@ -106,14 +106,22 @@ function polls_page_handler($page) {
 }
 
 /**
- * Populates the ->getUrl() method for poll objects
+ * Returns the URL from a photo entity
  *
- * @param ElggEntity $pollpost poll post entity
- * @return string poll post URL
+ * @param string $hook   'entity:url'
+ * @param string $type   'object'
+ * @param string $url    The current URL
+ * @param array  $params Hook parameters
+ * @return string
  */
-function polls_url($poll) {
-	$title = elgg_get_friendly_title($poll->title);
-	return  "polls/view/" . $poll->guid . "/" . $title;
+function polls_url($hook, $type, $url, $params) {
+    $entity = $params['entity'];
+	// Check that the entity is a photo object
+    	if ($entity->getSubtype() !== 'poll') {
+        // This is not a poll object, so there's no need to go further
+        return;
+  }
+	return "polls/view/{$entity->guid}/{$entity->title}";
 }
 
 /**

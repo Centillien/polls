@@ -38,7 +38,12 @@ if (elgg_instanceof($poll,'object','poll')) {
 			// Add to river
 			$polls_vote_in_river = elgg_get_plugin_setting('vote_in_river','polls');
 			if ($polls_vote_in_river != 'no') {
-				add_to_river('river/object/poll/vote','vote',$user_guid,$poll->guid);
+				elgg_create_river_item(array(
+        	                        'view' => 'river/object/poll/vote',
+                	                'action_type' => 'vote',
+                        	        'subject_guid' => $user_guid,
+                                	'object_guid' => $poll->guid,
+                        	));
 			}
 				
 			if (get_input('callback')) {
