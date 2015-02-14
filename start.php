@@ -106,7 +106,7 @@ function polls_page_handler($page) {
 }
 
 /**
- * Returns the URL from a photo entity
+ * Returns the URL from a poll entity
  *
  * @param string $hook   'entity:url'
  * @param string $type   'object'
@@ -116,12 +116,12 @@ function polls_page_handler($page) {
  */
 function polls_url($hook, $type, $url, $params) {
     $entity = $params['entity'];
-	// Check that the entity is a photo object
+	// Check that the entity is a poll object
     	if ($entity->getSubtype() !== 'poll') {
         // This is not a poll object, so there's no need to go further
         return;
   }
-	return "polls/view/{$entity->guid}/{$entity->title}";
+	return "polls/view/{$entity->guid}/". elgg_get_friendly_title($entity->title);
 }
 
 /**
