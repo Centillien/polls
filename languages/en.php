@@ -61,7 +61,7 @@
 		/**
 	     * poll widget
 	     **/
-			'polls:latest_widget_title' => "Latest MyVox polls",
+			'polls:latest_widget_title' => "Latest polls",
 			'polls:latest_widget_description' => "Displays the most recent polls.",
 			'polls:my_widget_title' => "My polls",
 			'polls:my_widget_description' => "This widget will display your polls.",
