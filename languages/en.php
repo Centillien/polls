@@ -7,7 +7,7 @@
 		 */
 	
 			'poll' => "Poll",
-            'polls:add' => "New Poll",
+            		'polls:add' => "New Poll",
 			'polls' => "Polls",
 			'polls:votes' => "votes",
 			'polls:user' => "%s's poll",
